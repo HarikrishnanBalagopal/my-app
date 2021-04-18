@@ -1,5 +1,7 @@
 .products-wrapper {
   background: rgb(77, 77, 77);
+  padding: 1em;
+  width: 100%;
 }
 
 .products {
@@ -10,8 +12,11 @@
 
 .product {
   display: inline-block;
+  margin-top: 1em;
   max-height: 24em;
   max-width: 24em;
+  padding: 1em;
+  background: rgb(36, 36, 36);
 }
 
 .product > img {

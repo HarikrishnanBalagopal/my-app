@@ -4,6 +4,13 @@ const AddProduct = (props) => (
   <div className="add-product">
     <h2 style={{ textAlign: "center" }}>Add a new product</h2>
     <form>
+      <label htmlFor="product-id">ID:</label>
+      <input
+        id="product-id"
+        name="product-id"
+        type="text"
+        placeholder="product id"
+      />
       <label htmlFor="name">Name:</label>
       <input id="name" name="name" type="text" placeholder="product name" />
       <label htmlFor="description">Description:</label>

@@ -7,7 +7,10 @@ const ListProducts = (props) => (
       {props.products.map((product, idx) => (
         <div key={idx} className="product">
           <img src={product.image} alt="product" />
-          <div>{product.name}</div>
+          <div>
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+          </div>
         </div>
       ))}
     </div>
