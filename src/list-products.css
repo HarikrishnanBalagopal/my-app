@@ -1,0 +1,19 @@
+.products-wrapper {
+  background: rgb(77, 77, 77);
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.product {
+  display: inline-block;
+  max-height: 24em;
+  max-width: 24em;
+}
+
+.product > img {
+  width: 100%;
+}

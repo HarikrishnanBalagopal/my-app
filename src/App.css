@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: white;
+}
+.app {
+  text-align: center;
+  height: 100vh;
+  overflow: auto;
+  background: rgb(36, 36, 36);
+}
+.product-wrapper {
+  display: flex;
+}
