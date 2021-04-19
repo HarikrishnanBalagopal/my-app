@@ -7,14 +7,19 @@ import { ListProducts } from "./list-products";
 class App extends React.Component {
     constructor(props) {
         super(props);
+        this.refresh = this.refresh.bind(this);
         this.state = {
             products: [],
         };
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.refresh();
+    }
+
+    async refresh() {
         const products = await getProducts();
-        console.log("products are:", products);
+        console.log("The products are:", products);
         this.setState({ products });
     }
 
@@ -24,7 +29,7 @@ class App extends React.Component {
             <div className="app">
                 <h1 style={{ textAlign: "center" }}>Dashboard</h1>
                 <div className="product-wrapper">
-                    <AddProduct />
+                    <AddProduct refresh={this.refresh} />
                     <ListProducts products={products} />
                 </div>
             </div>

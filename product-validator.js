@@ -7,6 +7,9 @@ const productValidationRules = [
     body("price")
         .isNumeric({ no_symbols: true })
         .withMessage("price must be a positive number"),
+    body("quantity")
+        .isNumeric({ no_symbols: true })
+        .withMessage("quantity must be a positive number"),
     body("image")
         .isURL({ require_host: false })
         .withMessage("image must be a valid relative URL"),
