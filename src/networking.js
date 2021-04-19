@@ -25,4 +25,13 @@ async function addProduct(newProduct) {
     }
 }
 
-export { getProducts, addProduct };
+async function deleteProduct(id) {
+    const url = `/api/products/${id}`;
+    const res = await fetch(url, { method: "DELETE" });
+    if (!res.ok) {
+        throw new Error(
+            `Failed to delete the product with id ${id}. Status: ${res.status}.`
+        );
+    }
+}
+export { getProducts, addProduct, deleteProduct };

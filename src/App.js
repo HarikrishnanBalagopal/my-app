@@ -3,24 +3,41 @@ import React from "react";
 import { getProducts } from "./networking";
 import { AddProduct } from "./add-product";
 import { ListProducts } from "./list-products";
+import { deleteProduct } from "./networking";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.refresh = this.refresh.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
         this.state = {
             products: [],
         };
     }
 
-    componentDidMount() {
-        this.refresh();
+    async componentDidMount() {
+        try {
+            await this.refresh();
+        } catch (e) {
+            console.error(e);
+            alert("Failed to fetch the products.");
+        }
     }
 
     async refresh() {
         const products = await getProducts();
         console.log("The products are:", products);
         this.setState({ products });
+    }
+
+    async deleteProduct(id) {
+        try {
+            await deleteProduct(id);
+            await this.refresh();
+        } catch (e) {
+            console.error(e);
+            alert(`Failed to delete the product with ${id} . ${e}`);
+        }
     }
 
     render() {
@@ -30,7 +47,10 @@ class App extends React.Component {
                 <h1 style={{ textAlign: "center" }}>Dashboard</h1>
                 <div className="product-wrapper">
                     <AddProduct refresh={this.refresh} />
-                    <ListProducts products={products} />
+                    <ListProducts
+                        products={products}
+                        deleteProduct={this.deleteProduct}
+                    />
                 </div>
             </div>
         );

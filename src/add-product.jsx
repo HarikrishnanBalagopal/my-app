@@ -8,7 +8,6 @@ const newProduct = () => ({
     description: "this is the description for product 1",
     price: 10,
     quantity: 100,
-    image: "/images/placeholder-image.png",
 });
 
 class AddProduct extends React.Component {
@@ -24,8 +23,7 @@ class AddProduct extends React.Component {
     async onSubmit() {
         try {
             await addProduct(this.state);
-            alert(`New product created.`);
-            this.setState(newProduct());
+            console.log("New product created.");
             this.props.refresh();
         } catch (e) {
             console.error(e);
@@ -33,7 +31,7 @@ class AddProduct extends React.Component {
         }
     }
     render() {
-        const { id, name, description, price, quantity, image } = this.state;
+        const { id, name, description, price, quantity } = this.state;
         return (
             <div className="add-product">
                 <h2 style={{ textAlign: "center" }}>Add a new product</h2>
@@ -91,16 +89,6 @@ class AddProduct extends React.Component {
                         value={quantity}
                         onChange={(e) =>
                             this.onChangeValue("quantity", e.target.value)
-                        }
-                    />
-                    <label htmlFor="image">Image:</label>
-                    <input
-                        id="image"
-                        name="image"
-                        type="text"
-                        value={image}
-                        onChange={(e) =>
-                            this.onChangeValue("image", e.target.value)
                         }
                     />
                     <input type="submit" />

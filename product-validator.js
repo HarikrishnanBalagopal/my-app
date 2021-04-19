@@ -6,13 +6,12 @@ const productValidationRules = [
     body("description").isString().withMessage("description must be a string"),
     body("price")
         .isNumeric({ no_symbols: true })
-        .withMessage("price must be a positive number"),
+        .withMessage("price must be a positive number")
+        .toFloat(),
     body("quantity")
         .isNumeric({ no_symbols: true })
-        .withMessage("quantity must be a positive number"),
-    body("image")
-        .isURL({ require_host: false })
-        .withMessage("image must be a valid relative URL"),
+        .withMessage("quantity must be a positive number")
+        .toInt(),
 ];
 
 const validate = (req, res, next) => {
