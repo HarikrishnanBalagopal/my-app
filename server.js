@@ -1,8 +1,10 @@
 const express = require("express");
 const { productValidationRules, validate } = require("./product-validator");
+const { getDatabaseClient } = require("./database");
 
 const PORT = 8080;
 const PUBLIC_ASSETS_PATH = "build/";
+/*
 const DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus condimentum, urna sed sagittis hendrerit, felis ipsum lacinia auctor.`;
 const PLACEHOLDER_IMG = "/images/placeholder-image.png";
 const PRODUCTS = [
@@ -39,8 +41,14 @@ const PRODUCTS = [
         image: PLACEHOLDER_IMG,
     },
 ];
+*/
 
-function main() {
+async function main() {
+    // database
+    const dbClient = await getDatabaseClient();
+    const products = dbClient.db("products-db").collection("products");
+    console.log("connected to mongodb");
+
     const app = express();
 
     // middle ware
@@ -50,15 +58,21 @@ function main() {
     app.use(express.static(PUBLIC_ASSETS_PATH));
 
     // dynamic routes
-    app.get("/api/products", (_, res) => {
-        res.json(PRODUCTS);
+    app.get("/api/products", async (_, res) => {
+        const result = await products.find().toArray();
+        res.json(result);
     });
-    app.post("/api/products", productValidationRules, validate, (req, res) => {
-        const newProduct = req.body;
-        PRODUCTS.push(newProduct);
-        console.log("added new product:", newProduct);
-        res.sendStatus(201);
-    });
+    app.post(
+        "/api/products",
+        productValidationRules,
+        validate,
+        async (req, res) => {
+            const newProduct = req.body;
+            await products.insert(newProduct);
+            console.log("added new product:", newProduct);
+            res.sendStatus(201);
+        }
+    );
 
     // start the server
     app.listen(PORT, () => console.log(`listing on ${PORT}`));
