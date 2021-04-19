@@ -12,10 +12,20 @@ const PRODUCTS = [
 
 function main() {
     const app = express();
+
+    // middle ware
+    app.use(express.json());
+
+    // static routes
     app.use(express.static(PUBLIC_ASSETS_PATH));
+
+    // dynamic routes
     app.get("/api/products", (req, res) => {
         res.json(PRODUCTS);
     });
+    app.post("/api/products", (req, res) => {});
+
+    // start the server
     app.listen(PORT, () => console.log(`listing on ${PORT}`));
 }
 
