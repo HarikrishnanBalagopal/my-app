@@ -1,4 +1,4 @@
-const { body, validationResult } = require("express-validator");
+const { body, cookie, validationResult } = require("express-validator");
 
 const productValidationRules = [
     body("id").isString().withMessage("id must be a string"),
@@ -14,6 +14,11 @@ const productValidationRules = [
         .toInt(),
 ];
 
+const loginValidationRules = [
+    body("username").isString().withMessage("username must be a string"),
+    body("password").isString().withMessage("password must be a string"),
+];
+
 const validate = (req, res, next) => {
     const result = validationResult(req);
     if (result.isEmpty()) return next();
@@ -21,4 +26,4 @@ const validate = (req, res, next) => {
     return res.status(422).json({ errors });
 };
 
-module.exports = { productValidationRules, validate };
+module.exports = { productValidationRules, loginValidationRules, validate };

@@ -1,15 +1,36 @@
 * {
-  box-sizing: border-box;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  color: white;
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    color: white;
 }
+
 .app {
-  text-align: center;
-  height: 100vh;
-  overflow: auto;
-  background: rgb(36, 36, 36);
+    text-align: center;
+    height: 100vh;
+    overflow: auto;
+    background: rgb(36, 36, 36);
 }
+
 .product-wrapper {
-  display: flex;
+    display: flex;
+}
+
+nav {
+    display: flex;
+    height: 3em;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+nav > a {
+    margin-left: 1em;
+}
+
+.nav-current-route {
+    margin-right: auto;
+    font-size: 2em;
+    font-weight: 600;
 }

@@ -22,7 +22,11 @@ class AddProduct extends React.Component {
     }
     async onSubmit() {
         try {
-            await addProduct(this.state);
+            const status = await addProduct(this.state);
+            if (status === 403) {
+                this.props.setLogin(false);
+                throw new Error("you are not logged in.");
+            }
             console.log("New product created.");
             this.props.refresh();
         } catch (e) {
